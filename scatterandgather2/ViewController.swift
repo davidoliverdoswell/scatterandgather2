@@ -19,14 +19,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var fifth: UILabel!
     @IBOutlet weak var sixth: UILabel!
     
+    var topConstraint: NSLayoutConstraint!
+    var leadingConstraint: NSLayoutConstraint!
     var widthConstraint: NSLayoutConstraint!
     var heightConstraint: NSLayoutConstraint!
-    var centerYConstraint: NSLayoutConstraint!
-    var centerXConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var toggleButton: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +34,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func toggle(_ sender: Any) {
+        UIView.animate(withDuration: 0.5) {
+            var frame = self.first.frame
+            frame.origin.x += 100
+            frame.origin.y += 200
+            
+            self.first.frame = frame
+            self.first.textColor = .red
+            self.first.font = UIFont.systemFont(ofSize: 150, weight: UIFont.Weight(rawValue: 50))
+        }
         
     }
     
@@ -47,6 +55,17 @@ class ViewController: UIViewController {
         view.addSubview(sixth)
         
         
+        topConstraint = NSLayoutConstraint(item: first, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 30)
+        
+        leadingConstraint = NSLayoutConstraint(item: first, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 30)
+        
+        widthConstraint = NSLayoutConstraint(item: first, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+       
+        heightConstraint = NSLayoutConstraint(item: second, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+        
+        
+        
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint, widthConstraint, heightConstraint])
     }
     
 }
